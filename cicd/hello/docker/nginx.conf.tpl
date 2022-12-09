@@ -9,7 +9,7 @@ http {
             return 200 "OK";
         }
 
-        location "welcome" {
+        location "/home" {
             access_log off;
             return 200 "{welcome_message}";
         }
