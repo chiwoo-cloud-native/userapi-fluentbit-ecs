@@ -54,16 +54,18 @@ resource "aws_codebuild_project" "this" {
       name  = "REPOSITORY_URI"
       value = var.repository_url
     }
-    /*
     environment_variable {
-      name  = "S3_BUCKET_NAME"
-      value = var.content_bucket.id
+      name  = "CONTAINER_NAME"
+      value = var.app_name
     }
     environment_variable {
-      name  = "CLOUDFRONT_DISTRIBUTION_ID"
-      value = var.site_distribution.id
+      name  = "CONTAINER_PORT"
+      value = var.container_port
     }
-    */
+    environment_variable {
+      name  = "HEALTH_CHECK_PATH"
+      value = var.health_check_path
+    }
   }
 
   source {

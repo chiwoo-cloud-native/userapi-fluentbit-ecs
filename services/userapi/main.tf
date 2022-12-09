@@ -112,8 +112,8 @@ module "app" {
   subnets               = data.aws_subnets.app.ids
   elb_name              = local.elb_name
   execution_role_arn    = data.aws_iam_role.ecs.arn
-  task_role_arn         = aws_iam_role.task_role.arn
-  depends_on = [
+  task_policy_json      = data.aws_iam_policy_document.custom.json
+  depends_on            = [
     module.build_app,
     module.build_fb
   ]

@@ -18,6 +18,14 @@ variable "context" {
 variable "vpc_id" { type = string }
 variable "app_name" { type = string }
 variable "repository_url" { type = string }
+variable "container_port" {
+  type = number
+  default = 80
+}
+variable "health_check_path" {
+  type = string
+  default = "/health"
+}
 variable "source_location" { type = string }
 variable "source_token_parameter_store" { type = string }
 variable "source_type" {

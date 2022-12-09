@@ -1,8 +1,10 @@
+# Provisioning VPC, ALB, ECS, so on
 terraform -chdir=main init
 terraform -chdir=main plan  -out main.planout
 terraform -chdir=main apply -auto-approve main.planout
 rm main/main.planout
 
+# Provisioning application - userapi
 terraform -chdir=services/userapi init
 terraform -chdir=services/userapi plan  -out userapi.planout
 terraform -chdir=services/userapi apply -auto-approve userapi.planout
