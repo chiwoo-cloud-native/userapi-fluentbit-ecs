@@ -10,8 +10,3 @@ variable "context" {
     pri_domain  = string # private domain name (ex, tools.customer.co.kr)
   })
 }
-
-variable "app_name" { type = string }
-variable "source_location" { type = string }
-variable "source_token_parameter_store" { type = string }
-#"https://github.com/parlicious/golf.git"

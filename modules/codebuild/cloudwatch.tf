@@ -9,3 +9,13 @@ resource aws_cloudwatch_log_group "this" {
     Name = local.cw_group_name
   })
 }
+
+/*
+module "log_group" {
+  source  = "terraform-aws-modules/cloudwatch/aws//modules/log-group"
+  version = "~> 3.0"
+
+  name              = "my-app"
+  retention_in_days = 120
+}
+*/

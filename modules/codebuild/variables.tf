@@ -17,7 +17,6 @@ variable "context" {
 
 variable "vpc_id" { type = string }
 variable "app_name" { type = string }
-variable "repository_id" { type = string }
 variable "repository_url" { type = string }
 variable "source_location" { type = string }
 variable "source_token_parameter_store" { type = string }

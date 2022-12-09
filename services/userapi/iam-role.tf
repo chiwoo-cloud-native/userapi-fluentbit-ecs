@@ -59,6 +59,7 @@ data "aws_iam_policy_document" "custom" {
   statement {
     effect  = "Allow"
     actions = [
+      "sts:AssumeRole",
       "logs:CreateLogGroup",
       "logs:CreateLogStream",
       "logs:DescribeLogGroups",

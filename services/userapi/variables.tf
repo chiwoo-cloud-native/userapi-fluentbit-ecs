@@ -11,12 +11,14 @@ variable "context" {
   })
 }
 
-#variable "team" { type = string }
 variable "app_name" { type = string }
 variable "cpu" { type = number }
 variable "memory" { type = number }
 variable "port" { type = number }
+variable "source_location" { type = string }
+variable "source_token_parameter_store" { type = string }
 variable "fluent_bit_image" { type = string }
+# https://github.com/parlicious/golf.git"
 
 #
 #variable "alb_hosts" {

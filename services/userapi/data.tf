@@ -7,15 +7,6 @@ data "aws_vpc" "this" {
   }
 }
 
-data "aws_ecr_repository" "this" {
-  name = "${local.name_prefix}-userapi-ecr"
-}
-
-data "aws_ecr_repository" "fb" {
-  name = "${local.name_prefix}-fluentbit-ecr"
-}
-
-
 data "aws_iam_role" "ecs" {
   name = "${local.project}EcsTaskExecutionRole"
 }
@@ -43,3 +34,4 @@ data "aws_kms_key" "this" {
 data "aws_security_group" "public_alb_sg" {
   name = "${local.name_prefix}-pub-alb-sg"
 }
+

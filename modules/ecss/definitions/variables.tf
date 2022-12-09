@@ -169,10 +169,10 @@ variable "log_configuration" {
   log_configuration = {
     "logDriver" = "awslogs"
     "options" = {
-      "awslogs-create-group" = "true",
-      "awslogs-group" = "awslogs-myapp",
-      "awslogs-region" = "ap-northeast-2",
-      "awslogs-stream-prefix" = "awslogs-myapp"
+      "awslogs-create-group" = "true"
+      "awslogs-group" = "awslogs-myapp"
+      "awslogs-region" = "ap-northeast-2"
+      "awslogs-stream-prefix" = "myapp"
     }
   }
 
@@ -181,11 +181,10 @@ variable "log_configuration" {
     "logDriver" = "awsfirelens"
     "options"   = {
       Name              = "cloudwatch"
-      region            = local.region
+      region            = "ap-northeast-2"
       log_group_name    = "/ecs/cluster-name/app-name"
       auto_create_group = true
-      log_stream_name   = var.app_name
-      log_stream_prefix = var.app_name
+      log_stream_prefix = "myapp-"
     }
   }
     EOT

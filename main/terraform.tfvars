@@ -8,8 +8,3 @@ context = {
   domain      = "sympleops.ml"
   pri_domain  = "sympleops.local"
 }
-
-app_name = "userapi"
-
-source_location              = "https://github.com/chiwoo-cloud-native/userapi-fluentbit-demo.git"
-source_token_parameter_store = "/symple/github/token"

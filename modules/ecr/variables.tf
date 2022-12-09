@@ -16,8 +16,6 @@ variable "context" {
 }
 
 variable "app_name" { type = string }
-
-/*
 # ECR
 variable "container_image" {
   description = "container image"
@@ -54,4 +52,9 @@ variable "ecr_kms_key" {
   type        = string
   default     = null
 }
-*/
+
+variable "ecr_image_limit" {
+  description = "ECR docker image limit count."
+  type        = number
+  default     = 0
+}
