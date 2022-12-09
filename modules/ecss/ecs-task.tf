@@ -8,7 +8,7 @@ resource "aws_ecs_task_definition" "this" {
   family                   = local.task_definition_name
   requires_compatibilities = var.requires_compatibilities
   network_mode             = "awsvpc"
-  task_role_arn            = var.task_role_arn
+  task_role_arn            = aws_iam_role.task_role.arn
   execution_role_arn       = var.execution_role_arn
   cpu                      = var.task_cpu
   memory                   = var.task_memory

@@ -49,13 +49,18 @@ variable "app_name" {
   type        = string
 }
 
-variable "task_role_arn" {
-  description = "ARN of IAM role that allows your Amazon ECS container task to make calls to other AWS services."
-  type        = string
+#variable "task_role_arn" {
+#  description = "ARN of IAM role that allows your Amazon ECS container task to make calls to other AWS services."
+#  type        = string
+#  default = null
+#}
+
+variable "task_policy_json" {
+  type = string
+  default = null
 }
 
-
-# ECS Tasks
+# ECS Task Definitions
 
 variable "essential" {
   description = "essential"

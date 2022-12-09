@@ -1,6 +1,4 @@
 locals {
-  # front_alb_listener_arn = concat(data.aws_lb_listener.data.*.arn, [""])[0]
-  # back_alb_listener_arn  = concat(aws_lb_listener.this.*.arn, [""])[0]
   elb_listener_arn = var.create_listener ? concat(aws_lb_listener.this.*.arn, [""])[0] : concat(data.aws_lb_listener.this.*.arn, [""])[0]
 }
 
@@ -23,8 +21,7 @@ resource "aws_lb_listener" "this" {
 
 # Add listener rule to ALB
 resource "aws_lb_listener_rule" "this" {
-  count        = var.create_listener ? 0 : 1 # var.frontend_alb_name != null && var.backend_alb_name == null ? 1 : 0
-  # listener_arn = concat(data.aws_lb_listener.this.*.arn, [""])[0]
+  count        = var.create_listener ? 0 : 1
   listener_arn = local.elb_listener_arn
 
   action {

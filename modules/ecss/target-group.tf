@@ -7,7 +7,7 @@ locals {
 }
 
 resource "aws_lb_target_group" "blue" {
-  count = var.delete_service ? 0 : 1
+#  count = var.delete_service ? 0 : 1
 
   name        = local.tg_name_blue
   port        = var.task_port
@@ -39,7 +39,7 @@ resource "aws_lb_target_group" "blue" {
 }
 
 resource "aws_lb_target_group" "green" {
-  count = var.delete_service ? 0 : 1
+#  count = var.delete_service ? 0 : 1
 
   name        = local.tg_name_green
   port        = var.task_port

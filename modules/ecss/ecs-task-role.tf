@@ -26,49 +26,16 @@ resource "aws_iam_role_policy_attachment" "ecsCmdExecPolicy" {
 }
 
 resource "aws_iam_policy" "custom" {
+  count  = var.task_policy_json == null ? 0 : 1
   name   = local.ecs_task_policy_name
-  policy = data.aws_iam_policy_document.custom.json
+  policy = var.task_policy_json
   tags   = merge(local.tags, {
     Name = local.ecs_task_policy_name
   })
 }
 
 resource "aws_iam_role_policy_attachment" "custom" {
+  count      = var.task_policy_json == null ? 0 : 1
   role       = aws_iam_role.task_role.name
   policy_arn = concat(aws_iam_policy.custom.*.arn, [""])[0]
-}
-
-##### you can add custom task execute policy for ecs app service
-data "aws_iam_policy_document" "custom" {
-
-  statement {
-    effect  = "Allow"
-    actions = [
-      "ssm:GetParameter",
-      "ssm:GetParameters"
-    ]
-    resources = ["arn:aws:ssm:${local.region}:${local.account_id}:parameter/symple/*"]
-  }
-
-  statement {
-    effect    = "Allow"
-    actions   = ["kms:Decrypt"]
-    resources = ["arn:aws:kms:${local.region}:${local.account_id}:key/${data.aws_kms_key.this.id}"]
-  }
-  # Cloudwatch
-  statement {
-    effect  = "Allow"
-    actions = [
-      "sts:AssumeRole",
-      "logs:CreateLogGroup",
-      "logs:CreateLogStream",
-      "logs:DescribeLogGroups",
-      "logs:DescribeLogStreams",
-      "logs:PutLogEvents",
-      "logs:GetLogEvents",
-      "logs:FilterLogEvents"
-    ]
-    resources = ["*"]
-  }
-
 }
