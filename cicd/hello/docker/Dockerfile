@@ -7,8 +7,8 @@ ENV LISTEN_PORT="${LISTEN_PORT}"
 ENV HEALTH_CHECK_PATH="${HEALTH_CHECK_PATH}"
 ENV WELCOME_MESSAGE="${WELCOME_MESSAGE}"
 
-COPY cicd/dumy/docker/nginx.conf.tpl /tmp/nginx.conf
-COPY cicd/dumy/docker/entrypoint.sh /entrypoint.sh
+COPY cicd/hello/docker/nginx.conf.tpl /tmp/nginx.conf
+COPY cicd/hello/docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 # Entrypoint
