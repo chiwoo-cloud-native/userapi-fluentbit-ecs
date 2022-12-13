@@ -32,7 +32,7 @@ module "td_app" {
 module "app" {
   source                = "../../modules/ecss/"
   context               = module.ctx.context
-  # delete_service = true
+  disabled_code_deploy  = true
   cluster_name          = local.cluster_name
   app_name              = var.app_name
   listener_port         = 443
