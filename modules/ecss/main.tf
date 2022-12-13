@@ -26,8 +26,12 @@ resource "aws_ecs_service" "this" {
   enable_ecs_managed_tags           = var.enable_ecs_managed_tags
   enable_execute_command            = var.enable_execute_command
 
-  deployment_controller {
-    type = var.deployment_controller
+
+  dynamic "deployment_controller" {
+    for_each = var.disabled_code_deploy ? [] : [1]
+    content {
+      type = var.deployment_controller
+    }
   }
 
   dynamic "load_balancer" {
@@ -58,8 +62,7 @@ resource "aws_ecs_service" "this" {
   lifecycle {
     ignore_changes = [
       load_balancer,
-      desired_count,
-      deployment_controller
+      desired_count
     ]
   }
 

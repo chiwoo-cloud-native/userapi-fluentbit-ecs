@@ -5,6 +5,12 @@ variable "delete_service" {
   default     = false
 }
 
+variable "disabled_code_deploy" {
+  description = "disabled_code_deploy"
+  type        = bool
+  default     = false
+}
+
 variable "cluster_name" {
   description = "ecs cluster name"
   type        = string

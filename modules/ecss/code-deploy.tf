@@ -5,7 +5,7 @@ locals {
 }
 
 resource "aws_codedeploy_app" "this" {
-  count            = var.delete_service ? 0 : 1
+  count            = var.delete_service || var.disabled_code_deploy ? 0 : 1
   compute_platform = "ECS"
   name             = local.code_deploy_name
   tags             = merge(local.tags,
@@ -14,7 +14,7 @@ resource "aws_codedeploy_app" "this" {
 }
 
 resource "aws_codedeploy_deployment_group" "this" {
-  count                  = var.delete_service ? 0 : 1
+  count            = var.delete_service || var.disabled_code_deploy ? 0 : 1
   app_name               = concat( aws_codedeploy_app.this.*.name, [""] )[0]
   deployment_group_name  = local.code_deploy_grp_name
   deployment_config_name = "CodeDeployDefault.ECSAllAtOnce"
