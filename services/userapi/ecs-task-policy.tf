@@ -25,8 +25,9 @@ data "aws_iam_policy_document" "custom" {
       "logs:DescribeLogGroups",
       "logs:DescribeLogStreams",
       "logs:PutLogEvents",
+      "logs:PutRetentionPolicy",
       "logs:GetLogEvents",
-      "logs:FilterLogEvents"
+      "logs:FilterLogEvents",
     ]
     resources = ["*"]
   }

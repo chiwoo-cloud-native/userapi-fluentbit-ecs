@@ -8,4 +8,9 @@ rm main/main.planout
 terraform -chdir=services/userapi init
 terraform -chdir=services/userapi plan  -out userapi.planout
 terraform -chdir=services/userapi apply -auto-approve userapi.planout
-rm services/userapp/userapi.planout
+rm services/userapi/userapi.planout
+
+# Provisioning application - hello
+# terraform -chdir=services/helloapi init
+# terraform -chdir=services/helloapi plan  -out helloapi.planout
+# terraform -chdir=services/helloapi apply -auto-approve helloapi.planout
