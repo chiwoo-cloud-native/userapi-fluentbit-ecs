@@ -8,9 +8,9 @@ ENV CONTAINER_PORT="${CONTAINER_PORT}"
 ENV HEALTH_CHECK_PATH="${HEALTH_CHECK_PATH}"
 ENV CONTAINER_NAME="${CONTAINER_NAME}"
 
-COPY cicd/hello/docker/makeconfig.sh /tmp/makeconfig.sh
-RUN chmod +x /tmp/makeconfig.sh
-RUN /tmp/makeconfig.sh
+COPY cicd/hello/docker/genconfig.sh /tmp/genconfig.sh
+RUN chmod +x /tmp/genconfig.sh
+RUN /tmp/genconfig.sh
 
 FROM nginx:alpine
 
