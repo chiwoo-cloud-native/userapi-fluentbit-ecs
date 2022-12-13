@@ -43,7 +43,7 @@ locals {
   log_configuration_secret_options = var.log_configuration != null ? lookup(var.log_configuration, "secretOptions", null) : null
   log_configuration_with_null      = var.log_configuration == null ? null : {
     logDriver     = tostring(lookup(var.log_configuration, "logDriver"))
-    options       = tomap(lookup(var.log_configuration, "options"))
+    options       = try(tomap(lookup(var.log_configuration, "options")), null)
     secretOptions = local.log_configuration_secret_options == null ? null : [
     for secret_option in tolist(local.log_configuration_secret_options) : {
       name      = tostring(lookup(secret_option, "name"))

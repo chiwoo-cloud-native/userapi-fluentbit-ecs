@@ -1,15 +1,15 @@
 variable "app_name" {
-  type        = string
+  type = string
 }
 
 variable "name_prefix" {
-  type        = string
+  type = string
 }
 
 variable "container_name" {
   type        = string
   description = "The name of the container. Up to 255 characters ([a-z], [A-Z], [0-9], -, _ allowed)"
-  default = null
+  default     = null
 }
 
 variable "container_image" {
@@ -43,7 +43,7 @@ variable "port_mappings" {
   }))
 
   description = "The port mappings to configure for the container. This is a list of maps. Each map should contain \"containerPort\", \"hostPort\", and \"protocol\", where \"protocol\" is one of \"tcp\" or \"udp\". If using containers in a task with the awsvpc or host network mode, the hostPort can either be left blank or set to the same value as the containerPort"
-  default = []
+  default     = []
 }
 
 # https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_HealthCheck.html
@@ -94,7 +94,15 @@ variable "environment" {
     name  = string
     value = string
   }))
-  description = "The environment variables to pass to the container."
+  description = <<EOT
+  The environment variables to pass to the container.
+
+  environment        = [
+    {
+      name  = "AWS_REGION"
+      value = "ap-northeast-2"
+    },
+  EOT
   default     = []
 }
 
@@ -148,7 +156,7 @@ variable "linux_parameters" {
     maxSwap            = number
     sharedMemorySize   = number
     swappiness         = number
-    tmpfs = list(object({
+    tmpfs              = list(object({
       containerPath = string
       mountOptions  = list(string)
       size          = number
@@ -167,8 +175,8 @@ variable "log_configuration" {
 
   # for awslogs
   log_configuration = {
-    "logDriver" = "awslogs"
-    "options" = {
+    logDriver = "awslogs"
+    options = {
       "awslogs-create-group" = "true"
       "awslogs-group" = "awslogs-myapp"
       "awslogs-region" = "ap-northeast-2"
@@ -178,8 +186,8 @@ variable "log_configuration" {
 
   # for awsfirelens
   log_configuration = {
-    "logDriver" = "awsfirelens"
-    "options"   = {
+    logDriver = "awsfirelens"
+    options   = {
       Name              = "cloudwatch"
       region            = "ap-northeast-2"
       log_group_name    = "/ecs/cluster-name/app-name"
@@ -197,7 +205,17 @@ variable "firelens_configuration" {
     type    = string
     options = map(string)
   })
-  description = "The FireLens configuration for the container. This is used to specify and configure a log router for container logs."
+  description = <<EOT
+  The FireLens configuration for the container. This is used to specify and configure a log router for container logs.
+
+  firelens_configuration = {
+    type    = "fluentbit"
+    options = {
+      "config-file-type"  = "file"
+      "config-file-value" = "/fluent-bit/etc/fluentbit-tail.conf"
+    }
+  }
+EOT
   default     = null
 }
 
@@ -245,7 +263,17 @@ variable "volumes_from" {
     sourceContainer = string
     readOnly        = bool
   }))
-  description = "A list of VolumesFrom maps which contain \"sourceContainer\" (name of the container that has the volumes to mount) and \"readOnly\" (whether the container can write to the volume)"
+  description = <<EOT
+  A list of VolumesFrom maps which contain "sourceContainer" (name of the container that has the volumes to mount)
+  and "readOnly" (whether the container can write to the volume)
+
+  volumes_from = [
+    {
+      sourceContainer = module.td_app.container_name
+      readOnly        = true
+    }
+  ]
+EOT
   default     = []
 }
 
